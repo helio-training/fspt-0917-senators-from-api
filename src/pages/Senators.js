@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import SenatorService from '../service'
+
 export default class extends Component {
 
   state = {
@@ -7,25 +9,20 @@ export default class extends Component {
   }
 
 
-  getSenators = async () => {
-    const results = await fetch('https://www.govtrack.us/api/v2/role?current=true&role_type=senator')
-    const { objects } = await results.json()
-    this.setState({ senators: objects })
-  }
-
-  componentDidMount() {
-    this.getSenators()
+  async componentDidMount() {
+    const senators = await SenatorService()
+    this.setState({ senators })
   }
 
 
   render() {
-
     const { senators } = this.state
+
     return (
       <div>
-        {senators.map(s => (
-            <div key={s.person.cspanid}>
-              {s.person.name}
+        {senators.map(senator => (
+            <div key={senator.person.cspanid}>
+              <a href={`/senators/${senator.person.cspanid}`}>{senator.person.name}</a>
             </div>
           ),
         )}

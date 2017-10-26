@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Senators from './Senators'
+import SenatorDetails from './SenatorDetails'
 
 export const HomePage = () => (
   <div>
@@ -9,13 +10,10 @@ export const HomePage = () => (
 )
 
 
-export const SenatorDetails = ({ match }) => (
-  <div>
-    <h1>Senator {match.params.id}</h1>
-  </div>
-)
+
 
 
 export {
-  Senators
+  Senators,
+  SenatorDetails
 }
